@@ -2,7 +2,6 @@
   (:require
    [reagent.core :as r]))
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Vars
 
@@ -19,32 +18,38 @@
               :on-click #(swap! app-state
                                 (fn [a] (assoc a :click-count
                                                (inc (:click-count a)))))}]]))
-(defn save []
-  "")
+(defn save [text]
+  #(swap! app-state
+          (fn [a] (assoc a :todo
+                         (conj (:todo a) text)))))
 
 (defn clone-component [ratom]
     [:div
      [:input {:type "text" :value (:text @app-state)}]])
+
+(defn board-component [ratom]
+    [:div
+     [:p (str (:todo @app-state))]
+     [:input {:type "button" :value "Save"
+              :on-click (save (:text @app-state))}]])
 
 (defn todo-component [ratom]
     [:div
      [:input {:type "text" :value (:text @app-state)
               :on-change #(swap! app-state (fn [a]
                                              (assoc a :text
-                                                 (-> % .-target .-value))))
-              :on-key-down #(case (.-which %)
-                               13 (save)
-                               nil)}]])
+                                                 (-> % .-target .-value))))}]])
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Page
 
 (defn page [ratom]
   [:div
-   "Welcome to reagent-figwheel."
-   ;;(counting-component ratom)
-   ;;(todo-component ratom)
-   ;;(clone-component ratom)
+   "If you see this, then it is working"
+   ;; (counting-component ratom)
+   ;; (todo-component ratom)
+   ;; (clone-component ratom)
+   ;; (board-component ratom)
   ]
   )
 
