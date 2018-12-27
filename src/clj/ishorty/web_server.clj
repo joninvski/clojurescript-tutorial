@@ -4,7 +4,7 @@
             [clojure.core.async :as async]
             [com.stuartsierra.component :as component]))
 
-(defn top-urls-updates [sse-mult]
+(defn get-messages [sse-mult]
   (yada/resource
     {:methods
      {:get
@@ -25,7 +25,7 @@
 (defn api [sse-mult]
   ["/"
     [[["api/"]
-      [["top/messages" (top-urls-updates sse-mult)]]]
+      [["top/messages" (get-messages sse-mult)]]]
      ["index.html" (shorten-frontend)]
      ["css/" (yada/as-resource (clojure.java.io/file "target/css"))]
      ["js/" (yada/as-resource (clojure.java.io/file "target/js"))]]])

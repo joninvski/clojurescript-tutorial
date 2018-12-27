@@ -1,4 +1,4 @@
-(ns ishorty.top-urls-section-app
+(ns ishorty.last-msgs-section-app
   (:require [reagent.core :as r]
             [cljs.reader :refer (read-string)]))
 
