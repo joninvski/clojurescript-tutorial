@@ -47,7 +47,7 @@
   (future-cancel update-future)
   (async/close! sse-chan))
 
-(defrecord WebServer [port web-server redis]
+(defrecord WebServer [port web-server]
   component/Lifecycle
 
   (start [component]
@@ -70,7 +70,4 @@
     (assoc component :web-server nil)))
 
 (defn new-web-server [port]
-  (let [dependencies [:redis]]
-    (component/using
-      (map->WebServer {:port port})
-      dependencies)))
+  (map->WebServer {:port port}))

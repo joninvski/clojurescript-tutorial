@@ -2,17 +2,14 @@
   "Entrypoint for initializing system"
   (:require [com.stuartsierra.component :as component]
             [ishorty.web-server :as web-server]
-            [ishorty.repository :as repository]
             [environ.core :refer [env]]))
 
 (def system nil)
 (def http-port (Integer. (env :http-port "8080")))
-(def redis-url (env :redis-url "redis.local"))
 
 (defn- system-map [config]
   (component/system-map
-    :http (web-server/new-web-server (:port config))
-    :redis (repository/new-repository (:redis-url config))))
+    :http (web-server/new-web-server (:port config))))
 
 (defn- block-forever []
   @(promise))
@@ -21,8 +18,7 @@
   (system-map config))
 
 (defn start-all []
-  (let [config {:port http-port
-                :redis-url redis-url}]
+  (let [config {:port http-port}]
     (def system (component/start (new-system config)))))
 
 (defn stop-all []

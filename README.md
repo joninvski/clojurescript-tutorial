@@ -36,9 +36,6 @@ make dev
 make run
 ```
 
-This will use a redis in a local container. If you want to use a different
-redis please update the `.env` file.
-
-You can also change the `HTTP_PORT` in the same file to suit your needs.
+You can change the `HTTP_PORT` in the `.env` file to suit your needs.
 
 After the `make run` command finished, point your browser to `http://localhost:${HTTP_PORT}/`.

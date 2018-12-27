@@ -13,7 +13,6 @@
                   [selmer                     "1.11.7" ]
                   [environ                    "1.1.0" ]
                   [adzerk/boot-test           "1.2.0" ]
-                  [com.taoensso/carmine       "2.18.1" ]
                   [com.cemerick/piggieback    "0.2.1"]
                   [weasel                     "0.7.0"]
                   [org.clojure/tools.nrepl    "0.2.12"]
