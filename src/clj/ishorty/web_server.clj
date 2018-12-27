@@ -30,15 +30,15 @@
      ["css/" (yada/as-resource (clojure.java.io/file "target/css"))]
      ["js/" (yada/as-resource (clojure.java.io/file "target/js"))]]])
 
+(defn- invent-message []
+  (str {:my-val (rand-int 100)}))
+
 (defn- periodical-top-url-update [top-url-refresh-time sse-chan]
   (future
     (while (not (Thread/interrupted))
       (do
         (Thread/sleep top-url-refresh-time)
         (async/put! sse-chan (invent-message))))))
-
-(defn- invent-message []
-  (str {:my-val (rand-int 100)}))
 
 (defn create-web-server [port sse-mult]
   (yada/listener
