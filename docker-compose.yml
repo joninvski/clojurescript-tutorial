@@ -1,0 +1,57 @@
+version: "3"
+
+services:
+  web:
+    build: .
+    ports:
+      - "${HTTP_PORT}:${HTTP_PORT}"
+    environment:
+      - HTTP_PORT
+      - REDIS_URL
+      - BOOT_LOCAL_REPO=/usr/src/app/.m2
+    links:
+      - redis:redis.local
+    networks:
+      - front-tier
+      - back-tier
+
+  repl:
+    build: .
+    command: boot repl -b ${REPL_HOST} -p ${REPL_PORT}
+    volumes:
+        - .:/usr/src/app
+    ports:
+      - "${REPL_PORT}:${REPL_PORT}"
+      - "${HTTP_PORT}:${HTTP_PORT}"
+    links:
+      - redis:redis.local
+    environment:
+      - HTTP_PORT=3500
+      - BOOT_LOCAL_REPO=/usr/src/app/.m2
+      - REDIS_URL=redis://redis.local/
+    networks:
+      - front-tier
+      - back-tier
+
+  test:
+    build: .
+    command: boot test
+    links:
+      - redis:redis.local
+    volumes:
+        - .:/usr/src/app
+    environment:
+      - HTTP_PORT
+      - BOOT_LOCAL_REPO=/usr/src/app/.m2
+      - REDIS_URL=redis://redis.local/
+    networks:
+      - back-tier
+
+  redis:
+    image: redis
+    networks:
+      - back-tier
+
+networks:
+  front-tier:
+  back-tier:

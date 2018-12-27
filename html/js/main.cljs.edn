@@ -1,0 +1,2 @@
+{:require [ishorty.core ishorty.top-urls-section-app]
+ :compiler-options {:asset-path "js/main.out"}}

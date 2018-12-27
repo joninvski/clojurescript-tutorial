@@ -1,0 +1,43 @@
+{% extends "_wrapper.html" %}
+
+{% block main %}
+
+<h1>iShorty</h1>
+
+<section id="shorten-section">
+    <form id="shorten-form" action="" method="post" novalidate>
+        <fieldset>
+            <div>
+                <label for="long-url-input">Url you want to shorten</label>
+                <input type="text" name="long-url" id="long-url-input" required>
+            </div>
+            <div id="valid-url-warning-div"></div>
+            <div><input type="submit" value="Shorten" id="submit-input"></div>
+        </fieldset>
+        <label for="last-long-url-input">Original Url</label>
+        <input type="text"
+               name="last-long-url"
+               id="last-long-url-input"
+               value=""
+               readonly>
+        <label for="last-short-url-input">Shortenned code</label>
+        <input type="text"
+               name="last-short-url"
+               id="last-short-url-input"
+               value=""
+               readonly>
+        <label for="last-short-url-input">Shorty URL</label>
+        <input type="text"
+               name="last-short-link-url"
+               id="last-short-url-link-input"
+               value=""
+               readonly>
+    </form>
+    <button id="open-shorten-button">Go to shortenned URL</button>
+</section>
+
+<section id="top-urls-section">
+  <p>Initialising...</p>
+</section>
+
+{% endblock %}
