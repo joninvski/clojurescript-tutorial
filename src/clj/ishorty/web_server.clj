@@ -35,7 +35,7 @@
     (while (not (Thread/interrupted))
       (do
         (Thread/sleep top-url-refresh-time)
-        (async/put! sse-chan (str "hello"))))))
+        (async/put! sse-chan (str {:my-val 32}))))))
 
 (defn create-web-server [port sse-mult]
   (yada/listener

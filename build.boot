@@ -35,7 +35,22 @@
   (comp
     (check/with-kibit)))
 
-(deftask dev []
+(deftask start-serving []
+  (comp
+   (with-pass-thru _
+     (main/start-all))))
+
+(deftask stop-serving []
+  (comp
+   (with-pass-thru _
+     (main/stop-all))))
+
+(deftask compile-cljs []
+  (comp
+   (cljs)
+   (target :dir #{"target"})))
+
+(deftask serve-with-clj-reload []
   (comp
    (with-pass-thru _
      (main/start-all))

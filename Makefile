@@ -17,4 +17,4 @@ test:
 	docker-compose run test
 
 dev:
-	docker-compose run --service-ports repl boot dev
+	docker-compose run --service-ports repl boot serve-with-clj-reload
